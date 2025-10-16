@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Notes Summarizer 🧠✨</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      padding: 30px;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 {
+      color: #2f3640;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 15px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #result {
+      background: white;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 5px;
+      min-height: 60px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #888;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📝 AI Notes Summarizer</h1>
+  <p>Paste your text below and click <strong>"Summarize"</strong> to get a short, clean summary.</p>
+  
+  <textarea id="inputText" placeholder="Paste your long text here..."></textarea>
+  
+  <button onclick="summarize()">Summarize</button>
+  
+  <div id="result">🪄 Summary will appear here...</div>
+
+  <div class="footer">
+    Made by Abdullah 💻 | Powered by Hugging Face
+  </div>
+
+  <script>
+    const API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
+    const API_TOKEN = "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";  // ✅ Your token added here
+
+    async function summarize() {
+      const text = document.getElementById("inputText").value;
+      const resultDiv = document.getElementById("result");
+
+      if (!text.trim()) {
+        alert("⚠️ Please enter some text first!");
+        return;
+      }
+
+      resultDiv.innerHTML = "⏳ Summarizing...";
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${API_TOKEN}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ inputs: text })
+        });
+
+        const data = await response.json();
+        if (data && data[0] && data[0].summary_text) {
+          resultDiv.innerHTML = "✅ " + data[0].summary_text;
+        } else {
+          resultDiv.innerHTML = "❌ Error: " + JSON.stringify(data);
+        }
+      } catch (error) {
+        resultDiv.innerHTML = "❌ Error: " + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
