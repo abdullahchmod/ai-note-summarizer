@@ -5,32 +5,36 @@
   <title>AI Notes Summarizer 🧠✨</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f6fa;
+      font-family: serif, sans-serif;
+      background: hsl(300, 14%, 92%);
       padding: 30px;
+      text-align: center;
       max-width: 700px;
       margin: auto;
     }
     h1 {
-      color: #2f3640;
+      color: #5e4caf;
       text-align: center;
     }
     textarea {
       width: 100%;
       height: 150px;
       padding: 10px;
+      text-align: center;
       font-size: 16px;
-      border: 1px solid #ccc;
+      border: 1px solid #000000;
       border-radius: 5px;
       margin-top: 15px;
     }
     button {
-      background-color: #4CAF50;
+      background-color: #5e4caf;
       color: white;
+      font-family: serif;
+      text-align: center;
       padding: 10px 20px;
       font-size: 16px;
-      border: none;
-      border-radius: 5px;
+      border:none;
+      border-radius: 20px;
       margin-top: 15px;
       cursor: pointer;
       display: block;
@@ -38,7 +42,7 @@
       margin-right: auto;
     }
     button:hover {
-      background-color: #45a049;
+      background-color: #000000;
     }
     #result {
       background: white;
@@ -46,20 +50,20 @@
       margin-top: 20px;
       border-radius: 5px;
       min-height: 60px;
-      border: 1px solid #ddd;
+      border: 1px solid #000000;
       font-size: 16px;
     }
     .footer {
       text-align: center;
       margin-top: 20px;
-      color: #888;
+      color: #000000;
       font-size: 14px;
     }
   </style>
 </head>
 <body>
   <h1>📝 AI Notes Summarizer</h1>
-  <p>Paste your text below and click <strong>"Summarize"</strong> to get a short, clean summary.</p>
+  <p>Paste your text below and click<strong>"Summarize"</strong> to get a short, clean summary.</p>
   
   <textarea id="inputText" placeholder="Paste your long text here..."></textarea>
   
@@ -72,8 +76,8 @@
   </div>
 
   <script>
-    const API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
-    const API_TOKEN = "abcdefghijklmnop";  // ✅ Your token added here
+    const API_URL = "https://router.huggingface.co/hf-inference/models/facebook/bart-large-cnn";
+    const API_TOKEN = "------------------------------------";  // ✅ Your token added here
 
     async function summarize() {
       const text = document.getElementById("inputText").value;
@@ -108,4 +112,6 @@
   </script>
 </body>
 </html>
+
+
 
